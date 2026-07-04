@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: Maize DUS Phenotyping Computational Workflow
+message: >-
+  If you use this repository, please cite the associated manuscript and
+  the software record described by this file.
+type: software
+license: AGPL-3.0
+version: 1.0.0
+date-released: 2026-06-30

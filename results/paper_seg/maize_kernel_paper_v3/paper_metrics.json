@@ -1,0 +1,56 @@
+{
+  "dataset": "kernel",
+  "data_yaml": "data-maize-ears-paper.yaml",
+  "classes": [
+    "seed"
+  ],
+  "model": "yolo11s-seg.pt",
+  "best_pt": "runs\\paper_seg\\maize_kernel_paper_v3\\weights\\best.pt",
+  "settings": {
+    "imgsz": 640,
+    "epochs": 120,
+    "batch": 2,
+    "workers": 4,
+    "device": "0",
+    "patience": 30,
+    "optimizer": "AdamW",
+    "lr0": 0.0005,
+    "weight_decay": 0.0005,
+    "seed": 42,
+    "cache": true,
+    "amp": false,
+    "close_mosaic": 10,
+    "degrees": 0.0,
+    "translate": 0.1,
+    "scale": 0.5,
+    "fliplr": 0.5,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "mosaic": 1.0,
+    "mixup": 0.0,
+    "copy_paste": 0.0
+  },
+  "val": {
+    "metrics/precision(B)": 0.964219448974175,
+    "metrics/recall(B)": 0.9811544189309873,
+    "metrics/mAP50(B)": 0.992685353356889,
+    "metrics/mAP50-95(B)": 0.8556190267083957,
+    "metrics/precision(M)": 0.9621567454226441,
+    "metrics/recall(M)": 0.9637326835583173,
+    "metrics/mAP50(M)": 0.9881245403258974,
+    "metrics/mAP50-95(M)": 0.6529011317024184,
+    "fitness": 1.5557491319380115
+  },
+  "test": {
+    "metrics/precision(B)": 0.9261991024857655,
+    "metrics/recall(B)": 0.9139009139009139,
+    "metrics/mAP50(B)": 0.9512884185101267,
+    "metrics/mAP50-95(B)": 0.7677186181486924,
+    "metrics/precision(M)": 0.9159312550222739,
+    "metrics/recall(M)": 0.9018759018759018,
+    "metrics/mAP50(M)": 0.9343823994509111,
+    "metrics/mAP50-95(M)": 0.5672155880881545,
+    "fitness": 1.390007867409266
+  }
+}

@@ -1,0 +1,121 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# IDE and workspace settings
+.idea/
+.vscode/
+*.code-workspace
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py,cover
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build and packaging
+build/
+dist/
+site/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# TensorBoard and training event files
+events.out.tfevents*
+
+# Generic training caches and intermediate artifacts
+runs/
+YOLO11/
+
+# Keep curated final metrics/results tracked explicitly
+!results/
+!results/paper_seg/
+!results/paper_seg/**/paper_metrics.json
+
+# Large model artifacts by default
+*.pt
+*.pth
+*.onnx
+*.engine
+*.torchscript
+*.ckpt
+
+# Allow users to manually add selected lightweight model docs
+!models/
+!models/README.md
+
+# Large data files by default
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.bz2
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.parquet
+*.feather
+*.pickle
+*.pkl
+
+# Spreadsheet outputs often become large/noisy; keep only curated outputs already copied
+*.xlsm
+
+# Images: ignore generated bulky figures by default in ad hoc locations
+# Curated figures under docs/ or outputs/ can still be added explicitly if needed
+*.tif
+*.tiff
+
+# Local data dumps
+data/demo/**
+!data/demo/**/
+!data/demo/.gitkeep
+!data/demo/**/.gitkeep
+!data/README.md
+
+# Preserve curated output tables already included in the repo
+!outputs/
+!outputs/variety_core_fingerprint/
+!outputs/variety_core_fingerprint/*.csv
+
+# Preserve curated docs
+!docs/
+!docs/*.md
+!docs/*.csv
+!docs/*.tsv
+
+# Preserve configs and scripts
+!configs/
+!configs/*.yaml
+!scripts/
+!scripts/*.py
