@@ -55,10 +55,11 @@ events.out.tfevents*
 runs/
 YOLO11/
 
-# Keep curated final metrics/results tracked explicitly
-!results/
-!results/paper_seg/
-!results/paper_seg/**/paper_metrics.json
+# Generated results and statistical outputs are local only
+outputs/
+results/
+*.csv
+*.tsv
 
 # Large model artifacts by default
 *.pt
@@ -88,11 +89,17 @@ YOLO11/
 *.pickle
 *.pkl
 
-# Spreadsheet outputs often become large/noisy; keep only curated outputs already copied
+# Manuscript attachments and spreadsheet outputs
+*.docx
+*.xlsx
+*.xls
 *.xlsm
 
-# Images: ignore generated bulky figures by default in ad hoc locations
-# Curated figures under docs/ or outputs/ can still be added explicitly if needed
+# Generated figures
+*.png
+*.jpg
+*.jpeg
+*.pdf
 *.tif
 *.tiff
 
@@ -103,16 +110,10 @@ data/demo/**
 !data/demo/**/.gitkeep
 !data/README.md
 
-# Preserve curated output tables already included in the repo
-!outputs/
-!outputs/variety_core_fingerprint/
-!outputs/variety_core_fingerprint/*.csv
-
 # Preserve curated docs
 !docs/
 !docs/*.md
-!docs/*.csv
-!docs/*.tsv
+docs/final_manuscript_alignment.md
 
 # Preserve configs and scripts
 !configs/

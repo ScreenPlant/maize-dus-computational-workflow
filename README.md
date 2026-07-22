@@ -2,7 +2,7 @@
 
 This repository contains the computational workflow and analysis scripts supporting a maize DUS phenotyping study. It integrates instance segmentation, ROI-based phenotyping, trait-matrix analysis, and variety-level phenotypic fingerprint construction.
 
-The released codebase is organized as a reproducibility-oriented repository rather than a full lab working directory. It focuses on the scripts, configurations, audit records, and selected outputs required to understand and reproduce the main computational components of the study.
+The released codebase is organized as a methods-only, reproducibility-oriented repository rather than a full lab working directory. It contains scripts, configuration files, and methodological documentation; generated statistics, tables, figures, and manuscript attachments are excluded.
 
 ## Study scope
 
@@ -63,26 +63,8 @@ maize-dus-computational-workflow/
     analyze_category_fingerprint.py
     build_mixed_fingerprint.py
 
-  results/
-    paper_seg/
-      maize_plant_paper_aug_b2/
-        paper_metrics.json
-      maize_kernel_paper_v3/
-        paper_metrics.json
-
-  outputs/
-    variety_core_fingerprint/
-      core_trait_scoring_table.csv
-      selected_core_traits.csv
-      encoded_trait_matrix_for_id.csv
-      phenotypic_id_codes.csv
-      objective_scheme_comparison.csv
-      trait_number_comparison.csv
-      internal_validation_overview.csv
-
   docs/
     GitHub_Submission_Computational_Workflow.md
-    model_validation_summary.csv
 
   models/
     README.md
@@ -218,9 +200,6 @@ This part of the workflow covers:
 - frozen-code measurement-error sensitivity analysis
 - fully nested selection-stability analysis
 
-Representative outputs are stored in:
-
-- [outputs/variety_core_fingerprint](outputs/variety_core_fingerprint)
 To inspect the audited reference-evaluation and nested-selection method:
 
 ```powershell
@@ -229,27 +208,12 @@ python scripts/rebuild_internal_validation_s7.py --help
 
 The numerical rebuild requires an unencoded trait matrix, paired expert/image-derived agreement inputs, and user-supplied manuscript/supplementary templates. Generated statistics and revised documents are written to the user-selected output directory and are not included by this methods-only update.
 
-## Final paper-ready model results
-
-The final selected retrained runs currently included in this repository are:
-
-- Whole-plant organ segmentation:
-  - [results/paper_seg/maize_plant_paper_aug_b2/paper_metrics.json](results/paper_seg/maize_plant_paper_aug_b2/paper_metrics.json)
-- Kernel instance segmentation:
-  - [results/paper_seg/maize_kernel_paper_v3/paper_metrics.json](results/paper_seg/maize_kernel_paper_v3/paper_metrics.json)
-
-A compact summary table is provided in:
-
-- [docs/model_validation_summary.csv](docs/model_validation_summary.csv)
-
 ## Data availability
 
 This repository does not bundle the full raw image datasets by default. Instead, it is intended to provide:
 
 - code
 - configuration files
-- selected output tables
-- selected model-evaluation summaries
 - optional small demo subsets under `data/demo/`
 
 See [data/README.md](data/README.md) for the intended demo-data layout.

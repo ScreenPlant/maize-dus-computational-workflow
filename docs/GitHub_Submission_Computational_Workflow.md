@@ -64,16 +64,7 @@ The final dataset configurations are:
 - [configs/data-maize-plant-paper.yaml](../configs/data-maize-plant-paper.yaml)
 - [configs/data-maize-ears-paper.yaml](../configs/data-maize-ears-paper.yaml)
 
-### Final paper-ready runs
-
-The paper-ready retraining runs included in this release are:
-
-- Whole-plant model:
-  - [results/paper_seg/maize_plant_paper_aug_b2/paper_metrics.json](../results/paper_seg/maize_plant_paper_aug_b2/paper_metrics.json)
-- Kernel model:
-  - [results/paper_seg/maize_kernel_paper_v3/paper_metrics.json](../results/paper_seg/maize_kernel_paper_v3/paper_metrics.json)
-
-These files provide the validation and test metrics used to summarize model quality in the manuscript.
+Generated model metrics are written to user-selected output directories and are not included in this methods-only repository.
 
 ## Stage 3. ONNX export and deployment
 
@@ -110,7 +101,7 @@ The downstream trait-analysis layer is represented by:
 
 These scripts support trait filtering, normalization, feature ranking, clustering, dimensionality reduction, and visualization.
 
-## Stage 6. Variety-level core fingerprint workflow and outputs
+## Stage 6. Variety-level core fingerprint workflow
 
 ### Main analysis scripts
 
@@ -126,31 +117,9 @@ The core scripts for the variety-level fingerprint workflow are:
 - [scripts/analyze_category_fingerprint.py](../scripts/analyze_category_fingerprint.py)
 - [scripts/build_mixed_fingerprint.py](../scripts/build_mixed_fingerprint.py)
 
-### Key outputs
-
-Representative fingerprint outputs included in this repository are stored in:
-
-- [outputs/variety_core_fingerprint](../outputs/variety_core_fingerprint)
-
-This directory includes:
-
-- processed encoded trait matrices
-- phenotypic ID tables
-- core-trait scoring summaries
-- trait-subset comparison tables
-- internal validation and robustness summaries
-
 The audited method in `rebuild_internal_validation_s7.py` fits coding parameters on reference data only, applies frozen codebooks to evaluation or perturbed data, measures cross-library collisions, and repeats the complete selection workflow in nested splits.
 
-The most manuscript-facing outputs include:
-
-- [core_trait_scoring_table.csv](../outputs/variety_core_fingerprint/core_trait_scoring_table.csv)
-- [selected_core_traits.csv](../outputs/variety_core_fingerprint/selected_core_traits.csv)
-- [encoded_trait_matrix_for_id.csv](../outputs/variety_core_fingerprint/encoded_trait_matrix_for_id.csv)
-- [phenotypic_id_codes.csv](../outputs/variety_core_fingerprint/phenotypic_id_codes.csv)
-- [objective_scheme_comparison.csv](../outputs/variety_core_fingerprint/objective_scheme_comparison.csv)
-- [trait_number_comparison.csv](../outputs/variety_core_fingerprint/trait_number_comparison.csv)
-- [internal_validation_overview.csv](../outputs/variety_core_fingerprint/internal_validation_overview.csv)
+All generated matrices, statistical summaries, validation records, and robustness tables are written locally and excluded from version control.
 
 ### Manuscript figure generation
 
@@ -185,8 +154,6 @@ maize-dus-computational-workflow/
   scripts/
   data/
   models/
-  results/
-  outputs/
   docs/
 ```
 
