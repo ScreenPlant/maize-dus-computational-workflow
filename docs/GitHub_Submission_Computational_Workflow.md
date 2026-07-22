@@ -119,6 +119,9 @@ The core scripts for the variety-level fingerprint workflow are:
 - [scripts/build_variety_core_fingerprint.py](../scripts/build_variety_core_fingerprint.py)
 - [scripts/compare_core_fingerprint_schemes.py](../scripts/compare_core_fingerprint_schemes.py)
 - [scripts/internal_validate_core_fingerprint.py](../scripts/internal_validate_core_fingerprint.py)
+- [scripts/rebuild_internal_validation_s7.py](../scripts/rebuild_internal_validation_s7.py)
+- [scripts/refresh_core_scoring_from_s3_s5.py](../scripts/refresh_core_scoring_from_s3_s5.py)
+- [scripts/build_supplementary_table_s6.py](../scripts/build_supplementary_table_s6.py)
 - [scripts/plot_global_phenotype_heatmap.py](../scripts/plot_global_phenotype_heatmap.py)
 - [scripts/analyze_category_fingerprint.py](../scripts/analyze_category_fingerprint.py)
 - [scripts/build_mixed_fingerprint.py](../scripts/build_mixed_fingerprint.py)
@@ -137,6 +140,8 @@ This directory includes:
 - trait-subset comparison tables
 - internal validation and robustness summaries
 
+The audited method in `rebuild_internal_validation_s7.py` fits coding parameters on reference data only, applies frozen codebooks to evaluation or perturbed data, measures cross-library collisions, and repeats the complete selection workflow in nested splits.
+
 The most manuscript-facing outputs include:
 
 - [core_trait_scoring_table.csv](../outputs/variety_core_fingerprint/core_trait_scoring_table.csv)
@@ -146,6 +151,19 @@ The most manuscript-facing outputs include:
 - [objective_scheme_comparison.csv](../outputs/variety_core_fingerprint/objective_scheme_comparison.csv)
 - [trait_number_comparison.csv](../outputs/variety_core_fingerprint/trait_number_comparison.csv)
 - [internal_validation_overview.csv](../outputs/variety_core_fingerprint/internal_validation_overview.csv)
+
+### Manuscript figure generation
+
+Final figure-support scripts include:
+
+- [scripts/plot_main_representative_trait_agreement.py](../scripts/plot_main_representative_trait_agreement.py)
+- [scripts/plot_representative_fingerprint_heatmap.py](../scripts/plot_representative_fingerprint_heatmap.py)
+- [scripts/plot_supplementary_figure_s2_complete_agreement.py](../scripts/plot_supplementary_figure_s2_complete_agreement.py)
+- [scripts/plot_supplementary_figure_s3_biological_discrimination.py](../scripts/plot_supplementary_figure_s3_biological_discrimination.py)
+- [scripts/plot_fig3_games_howell_comparisons.py](../scripts/plot_fig3_games_howell_comparisons.py)
+- [scripts/regenerate_fig5c_from_current_table7.py](../scripts/regenerate_fig5c_from_current_table7.py)
+
+These scripts accept user-supplied data and output paths. Generated figures and source-data exports are intentionally not included in this methods-only update.
 
 ## Public data and model placeholders
 
@@ -196,6 +214,12 @@ python scripts/predict_seg.py --help
 
 ```powershell
 python scripts/build_variety_core_fingerprint.py --help
+```
+
+### Inspect the final audited internal-assessment workflow
+
+```powershell
+python scripts/rebuild_internal_validation_s7.py --help
 ```
 
 ## Summary

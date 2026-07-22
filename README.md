@@ -2,7 +2,7 @@
 
 This repository contains the computational workflow and analysis scripts supporting a maize DUS phenotyping study. It integrates instance segmentation, ROI-based phenotyping, trait-matrix analysis, and variety-level phenotypic fingerprint construction.
 
-The released codebase is organized as a reproducibility-oriented repository rather than a full lab working directory. It focuses on the scripts, configurations, and selected outputs required to understand and reproduce the main computational components of the study.
+The released codebase is organized as a reproducibility-oriented repository rather than a full lab working directory. It focuses on the scripts, configurations, audit records, and selected outputs required to understand and reproduce the main computational components of the study.
 
 ## Study scope
 
@@ -51,6 +51,13 @@ maize-dus-computational-workflow/
     build_variety_core_fingerprint.py
     compare_core_fingerprint_schemes.py
     internal_validate_core_fingerprint.py
+    rebuild_internal_validation_s7.py
+    refresh_core_scoring_from_s3_s5.py
+    build_supplementary_table_s6.py
+    plot_main_representative_trait_agreement.py
+    plot_supplementary_figure_s2_complete_agreement.py
+    plot_supplementary_figure_s3_biological_discrimination.py
+    regenerate_fig5c_from_current_table7.py
     plot_global_phenotype_heatmap.py
     analyze_table3.py
     analyze_category_fingerprint.py
@@ -196,6 +203,9 @@ The variety-level fingerprint analysis is centered on:
 - [scripts/build_variety_core_fingerprint.py](scripts/build_variety_core_fingerprint.py)
 - [scripts/compare_core_fingerprint_schemes.py](scripts/compare_core_fingerprint_schemes.py)
 - [scripts/internal_validate_core_fingerprint.py](scripts/internal_validate_core_fingerprint.py)
+- [scripts/rebuild_internal_validation_s7.py](scripts/rebuild_internal_validation_s7.py)
+- [scripts/refresh_core_scoring_from_s3_s5.py](scripts/refresh_core_scoring_from_s3_s5.py)
+- [scripts/build_supplementary_table_s6.py](scripts/build_supplementary_table_s6.py)
 
 This part of the workflow covers:
 
@@ -204,11 +214,20 @@ This part of the workflow covers:
 - exhaustive subset search
 - forward-selection trace analysis
 - objective-scheme comparison
-- bootstrap, holdout, and noise-based robustness assessment
+- audited bootstrap OOB and constrained reference-evaluation assessment
+- frozen-code measurement-error sensitivity analysis
+- fully nested selection-stability analysis
 
 Representative outputs are stored in:
 
 - [outputs/variety_core_fingerprint](outputs/variety_core_fingerprint)
+To inspect the audited reference-evaluation and nested-selection method:
+
+```powershell
+python scripts/rebuild_internal_validation_s7.py --help
+```
+
+The numerical rebuild requires an unencoded trait matrix, paired expert/image-derived agreement inputs, and user-supplied manuscript/supplementary templates. Generated statistics and revised documents are written to the user-selected output directory and are not included by this methods-only update.
 
 ## Final paper-ready model results
 
@@ -241,7 +260,7 @@ This repository was assembled from a larger active research workspace. As a resu
 
 - only selected manuscript-relevant scripts are included here;
 - filenames have been partially normalized for public readability;
-- some original development scripts preserved hard-coded local paths and may require further cleanup for full portability.
+- manuscript-facing scripts use repository-relative defaults or explicit command-line inputs; historical exploratory scripts may still require user-supplied data paths.
 
 The public release is intended to prioritize manuscript support, methodological transparency, and computational reproducibility.
 

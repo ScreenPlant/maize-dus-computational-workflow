@@ -15,4 +15,6 @@ umap-learn
 imbalanced-learn
 openpyxl
 Pillow
-
+python-docx
+joblib
+tabulate
