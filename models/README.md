@@ -1,18 +1,7 @@
-# Models
+# Whole-plant model
 
-Place the final deployable model files in this directory.
-
-Recommended contents:
-
-- whole-plant ONNX model
-- kernel ONNX model
-- optional `best.pt` checkpoints if redistribution is appropriate
-
-Each model release should be accompanied by:
-
-- task description
-- class list
-- input size
-- validation metrics
-- test metrics
-
+`plant_deployment_5class.onnx` contains the retained trained deployment parameters.
+Its SHA256 and class dictionary are provided alongside the file. No kernel model is part of
+the reported 2025 ear workflow. Retained six-class checkpoint AP must not be attributed to
+this five-class artifact without a matching evaluation. Model and image provenance remain
+separate from the internal fingerprint reference/evaluation partitions.

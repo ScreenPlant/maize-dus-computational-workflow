@@ -1,233 +1,49 @@
-# Maize DUS Phenotyping Computational Workflow
+# Reliability- and robustness-constrained maize research fingerprints
 
-This repository contains the computational workflow and analysis scripts supporting a maize DUS phenotyping study. It integrates instance segmentation, ROI-based phenotyping, trait-matrix analysis, and variety-level phenotypic fingerprint construction.
+This revision implements a research phenotypic fingerprint workflow for a single-site/year
+maize panel. It does not establish formal DUS distinctness, external validity, or reliable
+reference-to-image identity matching. The model-based robustness target concerns uniqueness,
+and complete reference-image code agreement is a separate outcome.
 
-The released codebase is organized as a methods-only, reproducibility-oriented repository rather than a full lab working directory. It contains scripts, configuration files, and methodological documentation; generated statistics, tables, figures, and manuscript attachments are excluded.
+## Current entry points
 
-## Study scope
+1. `scripts/build_variety_table.py`: aggregate private 20-object paired records and 3-image x
+   3-expert ratings to one reference/image value per variety and trait. T28 is a ratio of means.
+2. `scripts/run_revised_analysis.py`: reliability gates, exhaustive search, 10,000 all-subset
+   confirmation simulations, independent 10,000-simulation selected-subset auditing, and
+   1,000 complete endosperm-stratified 120/30 reselections. Evaluation accessions never fit
+   reliability statistics, coding parameters, discrepancy calibration, subset choice or audits.
+3. `scripts/summarize_nested.py`: retain all requested runs, including failures, in event denominators.
+4. `scripts/predict_plant_seg.py` and `scripts/evaluate_plant_seg.py`: artifact-specific segmentation
+   demonstration/evaluation, separate from statistical fingerprint refitting.
+5. `scripts/trait_agreement.py`: paired variety-level agreement, object variability and expert-rating evidence.
+6. `scripts/audit_gate_sensitivity.py` and `scripts/audit_model_sensitivity.py`: stricter reliability/exact-agreement gates and specified alternative discrepancy models. Sensitivity results do not replace the primary selection.
 
-This repository supports four major components of the study:
+Numerical/count gates are CCC >=0.80 and MAPE <10%; ordered-state linear kappa and nominal-state
+unweighted kappa must be >=0.60. Complete paired coverage and dominant-code fraction <0.90
+are required; deterministic ratio T28 is excluded as an independent candidate. Acceptance requires
+a 95% Wilson lower bound >=0.95 for complete simulated uniqueness. Size ranking follows acceptance;
+failed independent audits are retained without repeated selection. See `configs/analysis_protocol.json`.
 
-1. YOLOv11seg training and evaluation for maize whole-plant organ segmentation.
-2. YOLOv11seg training and evaluation for maize-ear kernel instance segmentation.
-3. Trait-level downstream analysis, clustering, and visualization.
-4. Variety-level core fingerprint construction, subset search, and robustness assessment.
-
-## Workflow overview
-
-The overall computational workflow can be summarized as follows:
-
-1. Annotation preparation and label conversion.
-2. YOLOv11seg training and validation for whole-plant and kernel tasks.
-3. ONNX export and deployment-oriented inference.
-4. ROI-supported phenotypic trait extraction and trait-matrix assembly.
-5. Trait filtering, clustering, and visualization.
-6. Variety-level core fingerprint scoring, subset optimization, and robustness validation.
-
-Detailed workflow notes are provided in:
-
-- [docs/GitHub_Submission_Computational_Workflow.md](docs/GitHub_Submission_Computational_Workflow.md)
-
-## Repository structure
-
-```text
-maize-dus-computational-workflow/
-  README.md
-  requirements.txt
-
-  configs/
-    data-maize-plant-paper.yaml
-    data-maize-ears-paper.yaml
-
-  scripts/
-    paper_train_seg.py
-    seg2onnx.py
-    predict_seg.py
-    labelme_to_yolo_seg.py
-    labelme_to_mask.py
-    trait_selection_hierarchical_clustering.py
-    dus_type_clustering_pipeline.py
-    core_trait_pca_kmeans_pipeline.py
-    build_variety_core_fingerprint.py
-    compare_core_fingerprint_schemes.py
-    internal_validate_core_fingerprint.py
-    rebuild_internal_validation_s7.py
-    refresh_core_scoring_from_s3_s5.py
-    build_supplementary_table_s6.py
-    plot_main_representative_trait_agreement.py
-    plot_supplementary_figure_s2_complete_agreement.py
-    plot_supplementary_figure_s3_biological_discrimination.py
-    regenerate_fig5c_from_current_table7.py
-    plot_global_phenotype_heatmap.py
-    analyze_table3.py
-    analyze_category_fingerprint.py
-    build_mixed_fingerprint.py
-
-  docs/
-    GitHub_Submission_Computational_Workflow.md
-
-  models/
-    README.md
-
-  data/
-    README.md
-    demo/
-```
-
-## Environment
-
-Install the main Python dependencies with:
+## Run with authorized private inputs (PowerShell)
 
 ```powershell
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+python scripts/build_variety_table.py --raw D:/authorized/object_ratings.xlsx --materials D:/authorized/materials.csv --output D:/authorized/rebuilt
+python scripts/run_revised_analysis.py --inputs D:/authorized/rebuilt --membership D:/authorized/membership1000.csv --output D:/analysis/revised --scope all --workers 4
+python scripts/summarize_nested.py --results D:/analysis/revised --output D:/analysis/summary --runs 1000
 ```
 
-Core dependencies include:
+Full authorized inputs are required; templates are under `data_schema/`. The reader should not
+expect examples to reproduce the complete panel results. Source code is Python. The historical
+C++ measurement application is not included. See `docs/measurement_scope.md`, `docs/data_access.md`
+and `environment/README.md`. Trained whole-plant ONNX parameters and their manifest are under `models/`.
 
-- `ultralytics`
-- `torch`
-- `onnxruntime`
-- `opencv-python`
-- `numpy`
-- `pandas`
-- `scikit-learn`
-- `scipy`
-- `matplotlib`
-- `seaborn`
-- `statsmodels`
-- `umap-learn`
+## Availability status
 
-## Segmentation training
-
-The main paper-ready training entry point is:
-
-- [scripts/paper_train_seg.py](scripts/paper_train_seg.py)
-
-### Whole-plant model
-
-Train the whole-plant organ segmentation model:
-
-```powershell
-python scripts/paper_train_seg.py --dataset plant --name maize_plant_paper_aug_b2 --device 0 --cache
-```
-
-### Kernel model
-
-Train the kernel instance-segmentation model:
-
-```powershell
-python scripts/paper_train_seg.py --dataset kernel --name maize_kernel_paper_v3 --device 0 --cache --batch 2 --lr0 0.0005 --no-amp --imgsz 640
-```
-
-### Resume an interrupted run
-
-```powershell
-python scripts/paper_train_seg.py --dataset plant --name maize_plant_paper_aug_b2 --device 0 --cache --resume
-```
-
-### Evaluate an existing checkpoint without retraining
-
-```powershell
-python scripts/paper_train_seg.py --dataset kernel --name maize_kernel_paper_v3 --device 0 --skip-train
-```
-
-## ONNX export and inference
-
-### Export a trained segmentation model to ONNX
-
-```powershell
-python scripts/seg2onnx.py
-```
-
-### Run segmentation inference
-
-```powershell
-python scripts/predict_seg.py
-```
-
-The current inference helper preserves the manuscript-era logic, including mask visualization and mask-only output generation, and now exposes its main inputs and outputs through CLI arguments.
-
-## Annotation preparation utilities
-
-### Convert LabelMe polygons to YOLO segmentation labels
-
-```powershell
-python scripts/labelme_to_yolo_seg.py
-```
-
-### Generate mask-based crops from LabelMe annotations
-
-```powershell
-python scripts/labelme_to_mask.py
-```
-
-## Trait analysis and clustering
-
-The repository includes several downstream analysis scripts for trait filtering, clustering, and visualization:
-
-- [scripts/trait_selection_hierarchical_clustering.py](scripts/trait_selection_hierarchical_clustering.py)
-- [scripts/dus_type_clustering_pipeline.py](scripts/dus_type_clustering_pipeline.py)
-- [scripts/core_trait_pca_kmeans_pipeline.py](scripts/core_trait_pca_kmeans_pipeline.py)
-- [scripts/analyze_table3.py](scripts/analyze_table3.py)
-
-These scripts cover:
-
-- missingness-based trait filtering
-- imputation and normalization
-- ANOVA and random-forest-based trait ranking
-- PCA, UMAP, hierarchical clustering, and KMeans
-- cluster visualization and trait heatmaps
-
-## Variety-level core fingerprint workflow
-
-The variety-level fingerprint analysis is centered on:
-
-- [scripts/build_variety_core_fingerprint.py](scripts/build_variety_core_fingerprint.py)
-- [scripts/compare_core_fingerprint_schemes.py](scripts/compare_core_fingerprint_schemes.py)
-- [scripts/internal_validate_core_fingerprint.py](scripts/internal_validate_core_fingerprint.py)
-- [scripts/rebuild_internal_validation_s7.py](scripts/rebuild_internal_validation_s7.py)
-- [scripts/refresh_core_scoring_from_s3_s5.py](scripts/refresh_core_scoring_from_s3_s5.py)
-- [scripts/build_supplementary_table_s6.py](scripts/build_supplementary_table_s6.py)
-
-This part of the workflow covers:
-
-- encoded fingerprint-matrix generation
-- core-trait scoring
-- exhaustive subset search
-- forward-selection trace analysis
-- objective-scheme comparison
-- audited bootstrap OOB and constrained reference-evaluation assessment
-- frozen-code measurement-error sensitivity analysis
-- fully nested selection-stability analysis
-
-To inspect the audited reference-evaluation and nested-selection method:
-
-```powershell
-python scripts/rebuild_internal_validation_s7.py --help
-```
-
-The numerical rebuild requires an unencoded trait matrix, paired expert/image-derived agreement inputs, and user-supplied manuscript/supplementary templates. Generated statistics and revised documents are written to the user-selected output directory and are not included by this methods-only update.
-
-## Data availability
-
-This repository does not bundle the full raw image datasets by default. Instead, it is intended to provide:
-
-- code
-- configuration files
-- optional small demo subsets under `data/demo/`
-
-See [data/README.md](data/README.md) for the intended demo-data layout.
-
-## Notes on curation
-
-This repository was assembled from a larger active research workspace. As a result:
-
-- only selected manuscript-relevant scripts are included here;
-- filenames have been partially normalized for public readability;
-- manuscript-facing scripts use repository-relative defaults or explicit command-line inputs; historical exploratory scripts may still require user-supplied data paths.
-
-The public release is intended to prioritize manuscript support, methodological transparency, and computational reproducibility.
-
-## Citation
-
-If you use this repository or its workflow in your work, please cite the associated manuscript and include the repository URL once publicly available.
+The source, protocol and deployment model are included in this revision. Images and annotations
+are outside the current public release. Versioned archives are listed under the repository's
+[Releases](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases).
+A software-archive DOI has not yet been assigned. No complete indoor imaging dataset or full
+protected phenotype input is represented as publicly deposited. Earlier default five/six-trait
+and 100-split scripts are retired in this tree; their paths contain notices, and Git history is retained.

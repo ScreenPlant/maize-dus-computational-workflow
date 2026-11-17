@@ -1,12 +1,4 @@
-path: data/maize_plant
-train: images/train
-val: images/val
-test: images/test
-
-names:
-  0: silk
-  1: leaf
-  2: root
-  3: ears
-  4: tassel
-  5: up_ear_pos
+# Retired model-development configuration.
+# This dictionary is not the deployed five-class model dictionary.
+# See configs/plant_deployment_classes.json and models/model_manifest.json.
+# No full training image set is included in this release.

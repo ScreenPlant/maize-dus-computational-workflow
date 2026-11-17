@@ -1,13 +1,6 @@
-# Data
+# Current release scope
 
-This directory is intended for small demo subsets only.
-
-Recommended structure:
-
-- `demo/plant/images/`
-- `demo/plant/labels/`
-- `demo/kernel/images/`
-- `demo/kernel/labels/`
-
-The full training datasets are not included here by default.
-
+See the repository README.md, docs/data_access.md and docs/measurement_scope.md.
+The revised constrained analysis replaces the earlier default workflows.
+Full protected phenotype inputs and imaging sets are not included.
+Approved representative examples will be identified explicitly when added.

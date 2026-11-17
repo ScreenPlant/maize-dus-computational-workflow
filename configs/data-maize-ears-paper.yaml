@@ -1,7 +1,4 @@
-path: data/maize_ears
-train: images/train
-val: images/val
-test: images/test
-
-names:
-  0: seed
+# Retired model-development configuration.
+# This dictionary is not the deployed five-class model dictionary.
+# See configs/plant_deployment_classes.json and models/model_manifest.json.
+# No full training image set is included in this release.

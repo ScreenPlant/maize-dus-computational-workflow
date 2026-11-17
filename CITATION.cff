@@ -1,9 +1,30 @@
 cff-version: 1.2.0
-title: Maize DUS Phenotyping Computational Workflow
-message: >-
-  If you use this repository, please cite the associated manuscript and
-  the software record described by this file.
+title: Reliability- and robustness-constrained maize research fingerprints
+message: Please cite the associated manuscript and the versioned software archive.
 type: software
 license: AGPL-3.0
-version: 1.0.0
-date-released: 2026-06-30
+version: 2.0.0
+repository-code: https://github.com/ScreenPlant/maize-dus-computational-workflow
+authors:
+  - family-names: "Wang"
+    given-names: "Zhenyu"
+  - family-names: "Fu"
+    given-names: "Shenzao"
+  - family-names: "Han"
+    given-names: "Ruixi"
+  - family-names: "Zhang"
+    given-names: "Xiujie"
+  - family-names: "Ren"
+    given-names: "Jun"
+  - family-names: "Li"
+    given-names: "Aiai"
+  - family-names: "Yan"
+    given-names: "Duozi"
+  - family-names: "Mur"
+    given-names: "Luis A. J."
+  - family-names: "Han"
+    given-names: "Jiwan"
+  - family-names: "Yang"
+    given-names: "Wanneng"
+  - family-names: "Yang"
+    given-names: "Kun"
