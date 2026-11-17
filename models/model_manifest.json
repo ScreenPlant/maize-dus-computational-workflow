@@ -11,6 +11,47 @@
     "tassel"
   ],
   "ultralytics_metadata": "8.3.32",
-  "training_checkpoint_linkage": "The retained six-class checkpoint is not asserted to be this model source",
-  "historical_ear_AI_enabled": false
+  "training_checkpoint_linkage": "The supplied six-class checkpoint is a later version with up_ear_pos, confirmed by the authors; it is not the source of this five-class deployment ONNX.",
+  "historical_ear_AI_enabled": false,
+  "later_checkpoint": {
+    "file": "plant_later_6class.pt",
+    "source_filename": "best.pt",
+    "bytes": 20538340,
+    "sha256": "ae0cf75ca01a3cab1c67ec99a83b506d0772cc6d199df5321aa86c34bdc587ae",
+    "model": "YOLO11s-seg",
+    "role": "Later six-class version; not the original five-class study checkpoint",
+    "classes": {
+      "0": "silk",
+      "1": "leaf",
+      "2": "root",
+      "3": "ears",
+      "4": "tassel",
+      "5": "up_ear_pos"
+    },
+    "ultralytics_checkpoint_metadata": "8.3.89",
+    "original_training_pytorch_version": "[Pending verification]",
+    "training_args": {
+      "model": "yolo11s-seg.pt",
+      "task": "segment",
+      "epochs": 200,
+      "batch": 2,
+      "imgsz": 768,
+      "optimizer": "AdamW",
+      "lr0": 0.0005,
+      "seed": 42,
+      "amp": false,
+      "deterministic": true,
+      "pretrained": true,
+      "patience": 50,
+      "split": "val"
+    },
+    "stored_validation_metrics": {
+      "mask_mAP50": 0.76179,
+      "mask_mAP50_95": 0.39667,
+      "scope": "Saved validation fields in the later checkpoint; not recomputed or an independent test result"
+    },
+    "original_data_and_splits": "[Pending verification]",
+    "overlap_with_150_panel": "[Pending verification]",
+    "mask_IoU": "[Pending verification]"
+  }
 }

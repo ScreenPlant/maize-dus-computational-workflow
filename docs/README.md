@@ -1,7 +1,7 @@
 # Method notes
 
 - [Fingerprint analysis](methods.md)
-- [Image measurements](measurement_scope.md)
-- [Plant model and training records](model_notes.md)
-- [Data availability](data_access.md)
-- [Numerical checks](release_verification.md)
+- [Image measurements and trait scope](measurement_scope.md)
+- [YOLO11 model records and validation](yolo11_validation.md)
+- [Data availability](data_availability.md)
+- [Earlier numerical checks](release_verification.md)
