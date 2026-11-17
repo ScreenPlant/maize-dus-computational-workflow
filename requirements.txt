@@ -1,4 +1,4 @@
-# Python 3.13.5
+# Statistical analysis; Python 3.13.5
 numpy==2.4.3
 pandas==2.2.3
 scipy==1.15.3

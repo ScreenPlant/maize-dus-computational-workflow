@@ -1,49 +1,54 @@
-# Reliability- and robustness-constrained maize research fingerprints
+# Maize phenotyping and phenotypic fingerprinting
 
-This revision implements a research phenotypic fingerprint workflow for a single-site/year
-maize panel. It does not establish formal DUS distinctness, external validity, or reliable
-reference-to-image identity matching. The model-based robustness target concerns uniqueness,
-and complete reference-image code agreement is a separate outcome.
+Code and a trained whole-plant segmentation model for our maize phenotyping study. The analysis includes trait agreement, reliability- and robustness-constrained trait selection, and internal reference–evaluation analysis.
 
-## Current entry points
+## Contents
 
-1. `scripts/build_variety_table.py`: aggregate private 20-object paired records and 3-image x
-   3-expert ratings to one reference/image value per variety and trait. T28 is a ratio of means.
-2. `scripts/run_revised_analysis.py`: reliability gates, exhaustive search, 10,000 all-subset
-   confirmation simulations, independent 10,000-simulation selected-subset auditing, and
-   1,000 complete endosperm-stratified 120/30 reselections. Evaluation accessions never fit
-   reliability statistics, coding parameters, discrepancy calibration, subset choice or audits.
-3. `scripts/summarize_nested.py`: retain all requested runs, including failures, in event denominators.
-4. `scripts/predict_plant_seg.py` and `scripts/evaluate_plant_seg.py`: artifact-specific segmentation
-   demonstration/evaluation, separate from statistical fingerprint refitting.
-5. `scripts/trait_agreement.py`: paired variety-level agreement, object variability and expert-rating evidence.
-6. `scripts/audit_gate_sensitivity.py` and `scripts/audit_model_sensitivity.py`: stricter reliability/exact-agreement gates and specified alternative discrepancy models. Sensitivity results do not replace the primary selection.
+| Directory | Contents |
+| --- | --- |
+| [scripts](scripts/) | Trait analysis, fingerprint selection and plant segmentation |
+| [analysis](analysis/) | Functions used by the analysis scripts |
+| [models](models/) | Trained whole-plant ONNX model and class definitions |
+| [configs](configs/) | Analysis settings and model classes |
+| [data_schema](data_schema/) | Input table templates and trait definitions |
+| [environment](environment/) | Software versions |
+| [docs](docs/) | Method and data availability notes |
 
-Numerical/count gates are CCC >=0.80 and MAPE <10%; ordered-state linear kappa and nominal-state
-unweighted kappa must be >=0.60. Complete paired coverage and dominant-code fraction <0.90
-are required; deterministic ratio T28 is excluded as an independent candidate. Acceptance requires
-a 95% Wilson lower bound >=0.95 for complete simulated uniqueness. Size ranking follows acceptance;
-failed independent audits are retained without repeated selection. See `configs/analysis_protocol.json`.
+## Installation
 
-## Run with authorized private inputs (PowerShell)
+The statistical analysis uses Python 3.13.5.
 
 ```powershell
 python -m pip install -r requirements.txt
-python scripts/build_variety_table.py --raw D:/authorized/object_ratings.xlsx --materials D:/authorized/materials.csv --output D:/authorized/rebuilt
-python scripts/run_revised_analysis.py --inputs D:/authorized/rebuilt --membership D:/authorized/membership1000.csv --output D:/analysis/revised --scope all --workers 4
-python scripts/summarize_nested.py --results D:/analysis/revised --output D:/analysis/summary --runs 1000
 ```
 
-Full authorized inputs are required; templates are under `data_schema/`. The reader should not
-expect examples to reproduce the complete panel results. Source code is Python. The historical
-C++ measurement application is not included. See `docs/measurement_scope.md`, `docs/data_access.md`
-and `environment/README.md`. Trained whole-plant ONNX parameters and their manifest are under `models/`.
+Plant segmentation additionally requires Ultralytics and ONNX Runtime. The versions used for the inference check are listed in [environment/README.md](environment/README.md).
 
-## Availability status
+## Fingerprint analysis
 
-The source, protocol and deployment model are included in this revision. Images and annotations
-are outside the current public release. Versioned archives are listed under the repository's
-[Releases](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases).
-A software-archive DOI has not yet been assigned. No complete indoor imaging dataset or full
-protected phenotype input is represented as publicly deposited. Earlier default five/six-trait
-and 100-split scripts are retired in this tree; their paths contain notices, and Git history is retained.
+Prepare `materials.csv`, `variety_summary.csv` and the reference–evaluation membership file using the [input templates](data_schema/README.md). Place local inputs in `private_inputs/`.
+
+```powershell
+python scripts/run_revised_analysis.py --inputs private_inputs --membership private_inputs/membership.csv --output outputs --scope all
+python scripts/summarize_nested.py --results outputs --output outputs/summary --runs 1000
+```
+
+Traits are screened for reliability before subset selection and model-based robustness evaluation. Internal assessment uses 1,000 complete nested reselections. See the [method description](docs/methods.md) and [script list](scripts/README.md) for details.
+
+## Plant segmentation
+
+```powershell
+python scripts/predict_plant_seg.py --model models/plant_deployment_5class.onnx --input private_inputs/images --output outputs/segmentation
+```
+
+The model segments leaf, root, ear, silk and tassel regions. See [models/README.md](models/README.md) for the model file and class order.
+
+## Data availability
+
+This release provides code and the trained plant model. Cultivar-linked phenotype records, images and annotations are not publicly released because of confidentiality restrictions. Input templates contain column definitions only. Reproducing the study results requires the original study inputs and membership file.
+
+The fingerprint analyses describe the 150-variety, single-location and single-year study panel. Image-measurement methods and the scope of the public code are described in [docs/measurement_scope.md](docs/measurement_scope.md).
+
+## Citation
+
+Please cite the associated manuscript and the software version used. Citation information is provided in [CITATION.cff](CITATION.cff).

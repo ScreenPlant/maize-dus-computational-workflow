@@ -1,6 +1,3 @@
-# Current release scope
+# Maize phenotyping workflow
 
-See the repository README.md, docs/data_access.md and docs/measurement_scope.md.
-The revised constrained analysis replaces the earlier default workflows.
-Full protected phenotype inputs and imaging sets are not included.
-Approved representative examples will be identified explicitly when added.
+The current scripts and commands are listed in the [repository README](../README.md). See [methods.md](methods.md) for fingerprint analysis, [measurement_scope.md](measurement_scope.md) for image measurements, and [model_notes.md](model_notes.md) for model records.
