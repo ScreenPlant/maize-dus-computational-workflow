@@ -4,9 +4,9 @@ YOLO11s-seg was retrained on 256 images (one variety per image, author-confirmed
 LabelMe 5.5.0 with 4,225 polygons: leaf 3,084; root 152; ears 290; silk 335; tassel 364.
 The fixed variety-grouped train/validation/test split contains 154/51/51 images and 2,539/848/838
 polygons. Allocation used seed 42 and annotation-count balancing, without model performance.
-The authors confirmed on 19 November 2026 that these model materials do not overlap with the
-150-variety phenotype panel. See the [dated confirmation](author_confirmation_2026-11-19.md), which
-supersedes the earlier unverified status. This split remains a holdout within the annotated collection.
+The model-development varieties do not overlap with the 150-variety phenotype panel, as
+[confirmed by the authors](author_confirmation_2026-11-19.md) on 19 November 2026.
+This split remains a holdout within the annotated collection.
 
 Training requested 200 epochs and completed 155. best.pt is epoch 105, selected by validation
 box AP50:95 plus mask AP50:95; last.pt is retained separately. No test-based selection was used.
@@ -25,12 +25,13 @@ excluding background. False-positive regions are included. Intervals use 1,000 i
 seed 20261118. The initial statistics export failed after inference; an identical frozen-model/settings
 rerun exported results without test tuning. Logs and full metrics are included in the training archive.
 
-The new PT was retrained after loss of the historical PT. The retained ONNX (input 1920x1920;
-export metadata Ultralytics 8.3.32 / PyTorch producer 2.5.1) is a separate artifact. New PT metrics
-describe best.pt under its recorded evaluation protocol, not an independent ONNX performance test.
-The authors subsequently confirmed use of the same model weights for PyTorch and ONNX; no
-export-equivalence test was performed in this documentation update. Actual export metadata and hashes
-are retained. Original phenotype values, coding and selection results are unchanged.
+The model was retrained after loss of the previous PT checkpoint. PyTorch evaluation of best.pt
+and ONNX deployment used the same model weights, as confirmed by the authors. The reported AP
+and class-union IoU were measured using best.pt under the recorded 1024-pixel evaluation protocol;
+no independent ONNX performance evaluation is claimed. The ONNX deployment artifact has a
+1920x1920 input and retains its export metadata (Ultralytics 8.3.32 / PyTorch producer 2.5.1).
+No new export-equivalence test was performed in this documentation update. Format-specific hashes
+and export metadata are retained. Original phenotype values, coding and selection results are unchanged.
 
 Download [whole_plant_training_archive.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/whole_plant_training_archive.zip) for original
 LabelMe/YOLO annotations, frozen membership, environment, run settings, test results and reproduction

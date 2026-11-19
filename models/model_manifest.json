@@ -27,5 +27,7 @@
     }
   ],
   "best_selection": "Epoch 105; validation box AP50:95 plus mask AP50:95; 155 epochs completed.",
-  "historical_ONNX_is_not_the_new_PT": true
+  "best_PT_and_ONNX_same_weights_author_confirmed": true,
+  "model_development_overlap_with_150_variety_panel": false,
+  "identity_confirmation": "../docs/author_confirmation_2026-11-19.md"
 }

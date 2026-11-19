@@ -1,14 +1,15 @@
 # Data availability
 
-Small image examples and the new best/last PT weights are included in this repository.
+Small image examples, best.pt/last.pt checkpoints and the ONNX deployment model are included in this repository.
 Complete image, annotation and training packages are distributed through the
 [v2.1.0 Release](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/tag/v2.1.0); see [downloads](../data/README.md).
 
-The Release contains 958 curated indoor examples, 150 outdoor examples and a separate 256-image
-annotated model collection. These counts do not establish unique biological samples across collections.
-The authors confirmed no overlap between model-development varieties and the 150-variety phenotype
-panel on 19 November 2026; see the [dated addendum](author_confirmation_2026-11-19.md).
-Earlier unverified statements in the unchanged ZIPs predate that confirmation. Known content-to-prior-source filename
+The Release contains 958 indoor images, 150 outdoor images and a separate 256-image annotated
+model-development collection. The model-development collection and the 150-variety phenotype panel
+contain no overlapping varieties. PyTorch evaluation of best.pt and ONNX deployment used the same
+model weights, as [confirmed by the authors](author_confirmation_2026-11-19.md) on 19 November 2026.
+The current Release README and dated confirmation supersede earlier model-identity and overlap
+descriptions in the tagged source snapshot and original ZIPs. Known content-to-prior-source filename
 correspondences are retained with the complete data and do not establish cultivar equivalence.
 
 Complete historical phenotype/reference-evaluation inputs and the original C++ measurement application

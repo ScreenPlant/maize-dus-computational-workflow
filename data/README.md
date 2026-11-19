@@ -12,6 +12,8 @@ the complete training archive. They remain test examples and must not be added t
 ## Complete downloads
 
 Complete data are [Release attachments](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/tag/v2.1.0), separate from the small examples above.
+The 256-image annotated model-development collection has no variety overlap with the 150-variety
+phenotype panel, as [confirmed by the authors](../docs/author_confirmation_2026-11-19.md).
 
 | File | Contents |
 | --- | --- |
@@ -23,10 +25,11 @@ Complete data are [Release attachments](https://github.com/ScreenPlant/maize-dus
 | [indoor_kernels.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/indoor_kernels.zip) | 150 kernel images |
 | [indoor_anthers.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/indoor_anthers.zip) | 150 anther images |
 | [indoor_silks.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/indoor_silks.zip) | 58 silk images |
-| [outdoor_whole_plants.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/outdoor_whole_plants.zip) | 150 whole-plant examples |
+| [outdoor_whole_plants.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/outdoor_whole_plants.zip) | 150 whole-plant images |
 
-The Release includes README.md, LICENSE_DATA.txt, SHA256SUMS.txt, image_file_manifest.csv and
-image_content_source_correspondence.csv. Extract the eight example-image ZIPs into one common
+The Release includes the current README.md, LICENSE_DATA.txt, SHA256SUMS.txt, image_file_manifest.csv and
+image_content_source_correspondence.csv. The current Release README supersedes earlier model-identity
+and overlap descriptions bundled in the original archives. Extract the eight image ZIPs into one common
 directory; extract the training archive separately and follow its README.
 
 Images and annotations are CC BY-NC 4.0. The curated collection is not the complete historical
