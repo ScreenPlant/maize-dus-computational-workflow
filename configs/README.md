@@ -1,6 +1,4 @@
-# Analysis settings
+# Configuration
 
-- `analysis_protocol.json`: reliability criteria, coding rules, simulation settings and selection order.
-- `plant_deployment_classes.json`: the five classes used by the released plant model.
-
-The older `data-maize-*.yaml` files are retained as notices and are not used by the current analysis.
+- `analysis_protocol.json`: fixed statistical analysis settings, coding and selection rules.
+- `plant_deployment_classes.json`: the five whole-plant segmentation class IDs.

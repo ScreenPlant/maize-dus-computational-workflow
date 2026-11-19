@@ -8,10 +8,10 @@
 | `summarize_nested.py` | Summarize selection outcomes, code agreement and pairwise collisions |
 | `audit_gate_sensitivity.py` | Compare stricter reliability and agreement criteria |
 | `audit_model_sensitivity.py` | Compare discrepancy models and trait inclusion |
-| `predict_plant_seg.py` | Segment whole-plant images using the released ONNX model |
+| `predict_plant_seg.py` | Segment whole-plant images using a supplied PT or ONNX model |
 | `evaluate_plant_seg.py` | Evaluate a specified segmentation model and annotated dataset |
 
-Run a script with `--help` for its input arguments. Earlier script names contain notices directing users to the current commands.
+Run a script with `--help` for its input arguments.
 
 ## Prepare variety summaries
 
@@ -29,3 +29,13 @@ python scripts/summarize_nested.py --results outputs --output outputs/summary --
 ```
 
 The study uses 1,000 reference–evaluation allocations. Their membership file is required to reproduce the reported analysis. Input formats are described in [data_schema/README.md](../data_schema/README.md).
+
+
+## Segmentation
+
+```powershell
+python scripts/predict_plant_seg.py --model models/best.pt --input data/examples/outdoor/whole_plants --output outputs/segmentation --imgsz 1024
+```
+
+For exact frozen-test AP and class-union IoU reproduction, use the portable evaluator in
+whole_plant_training_archive.zip. The generic evaluate_plant_seg.py reports AP, not that union mIoU.

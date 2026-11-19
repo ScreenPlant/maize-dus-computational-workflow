@@ -1,54 +1,39 @@
 # Maize phenotyping and phenotypic fingerprinting
 
-Code and a trained whole-plant segmentation model for our maize phenotyping study. The analysis includes trait agreement, reliability- and robustness-constrained trait selection, and internal reference–evaluation analysis.
-
-## Contents
+Code, whole-plant segmentation weights and small image examples for the maize phenotyping study.
+Complete datasets and training evidence are provided as [versioned Release downloads](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/tag/v2.1.0).
 
 | Directory | Contents |
 | --- | --- |
-| [scripts](scripts/) | Trait analysis, fingerprint selection and plant segmentation |
-| [analysis](analysis/) | Functions used by the analysis scripts |
-| [models](models/) | Trained whole-plant ONNX model and class definitions |
-| [configs](configs/) | Analysis settings and model classes |
-| [data_schema](data_schema/) | Input table templates and trait definitions |
+| [models](models/) | New best/last PT weights and the retained historical ONNX |
+| [data](data/) | Indoor/outdoor examples, annotated examples and full-data download links |
+| [scripts](scripts/) and [analysis](analysis/) | Statistical analysis and segmentation commands |
+| [configs](configs/) and [data_schema](data_schema/) | Analysis settings, class IDs and input templates |
 | [environment](environment/) | Software versions |
-| [docs](docs/) | Method and data availability notes |
+| [docs](docs/) | Methods and validation scope |
 
-## Installation
-
-The statistical analysis uses Python 3.13.5.
+## Run
 
 ```powershell
 python -m pip install -r requirements.txt
+# Install the segmentation dependencies listed in environment/README.md.
+python scripts/predict_plant_seg.py --model models/best.pt --input data/examples/outdoor/whole_plants --output outputs/segmentation --imgsz 1024
 ```
 
-Plant segmentation additionally requires Ultralytics and ONNX Runtime. The versions used for the inference check are listed in [environment/README.md](environment/README.md).
+For phenotype analysis, see [scripts/README.md](scripts/README.md). Original phenotype inputs are required.
 
-## Fingerprint analysis
+## Model and data
 
-Prepare `materials.csv`, `variety_summary.csv` and the reference–evaluation membership file using the [input templates](data_schema/README.md). Place local inputs in `private_inputs/`.
+The new YOLO11s-seg uses five classes and a fixed 256-image train/validation/test split of 154/51/51.
+Test mask AP50: 0.796822; mask AP50:95: 0.450467; foreground class-union mIoU: 0.673647.
+See [validation details](docs/model_notes.md), including the quarter-resolution IoU grid and unverified
+overlap with the original 150-variety panel. The historical ONNX is a separate artifact.
+Existing phenotype values, coding and selection results were not recalculated.
 
-```powershell
-python scripts/run_revised_analysis.py --inputs private_inputs --membership private_inputs/membership.csv --output outputs --scope all
-python scripts/summarize_nested.py --results outputs --output outputs/summary --runs 1000
-```
+The complete Release contains 958 indoor examples, 150 outdoor examples and the separate annotated
+training collection. See [data/README.md](data/README.md) for downloads and [availability scope](docs/data_access.md).
 
-Traits are screened for reliability before subset selection and model-based robustness evaluation. Internal assessment uses 1,000 complete nested reselections. See the [method description](docs/methods.md) and [script list](scripts/README.md) for details.
+## License and citation
 
-## Plant segmentation
-
-```powershell
-python scripts/predict_plant_seg.py --model models/plant_deployment_5class.onnx --input private_inputs/images --output outputs/segmentation
-```
-
-The model segments leaf, root, ear, silk and tassel regions. See [models/README.md](models/README.md) for the model file and class order.
-
-## Data availability
-
-This release provides code and the trained plant model. Cultivar-linked phenotype records, images and annotations are not publicly released because of confidentiality restrictions. Input templates contain column definitions only. Reproducing the study results requires the original study inputs and membership file.
-
-The fingerprint analyses describe the 150-variety, single-location and single-year study panel. Image-measurement methods and the scope of the public code are described in [docs/measurement_scope.md](docs/measurement_scope.md).
-
-## Citation
-
-Please cite the associated manuscript and the software version used. Citation information is provided in [CITATION.cff](CITATION.cff).
+Code: [AGPL-3.0](LICENSE). Images and annotations: [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
+Checkpoints retain applicable upstream terms. Cite the manuscript and the version in [CITATION.cff](CITATION.cff).

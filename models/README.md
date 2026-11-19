@@ -1,19 +1,16 @@
-# Plant segmentation model
+# Whole-plant models
 
-`plant_deployment_5class.onnx` is the trained whole-plant model used for deployment. Its input size is 1920 × 1920 pixels.
-
-| Class ID | Label |
+| File | Use |
 | --- | --- |
-| 0 | leaf |
-| 1 | root |
-| 2 | ears |
-| 3 | silk |
-| 4 | tassel |
+| [best.pt](best.pt) | New YOLO11s-seg, validation-selected epoch 105; use for the reported new test metrics |
+| [last.pt](last.pt) | Final checkpoint after 155 epochs |
+| [plant_deployment_5class.onnx](plant_deployment_5class.onnx) | Separate historical deployment artifact, input 1920x1920 |
 
-The upper-ear leaf is selected during post-processing; it is not a separate model class. The 2025 ear and kernel analyses used conventional image processing.
+Class IDs: 0 leaf, 1 root, 2 ears, 3 silk, 4 tassel. The upper-ear leaf is selected during post-processing.
+The new PT was retrained after loss of the historical PT; it is not a recovery of that file.
+New PT metrics do not characterize the historical ONNX. See [validation](../docs/model_notes.md)
+and [file hashes](model_manifest.json).
 
-```powershell
-python scripts/predict_plant_seg.py --model models/plant_deployment_5class.onnx --input private_inputs/images --output outputs/segmentation
-```
-
-The file checksum is recorded in `model_manifest.json`. Training records and evaluation scope are described in [docs/model_notes.md](../docs/model_notes.md).
+[whole_plant_training_archive.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/whole_plant_training_archive.zip) includes the 256 images,
+original/converted annotations, frozen split, training settings, evaluator and test evidence.
+Checkpoints retain applicable Ultralytics/upstream licensing; the image-data license does not replace it.

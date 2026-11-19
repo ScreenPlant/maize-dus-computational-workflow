@@ -1,7 +1,14 @@
 # Data availability
 
-This release provides analysis code, input templates, software-version information and the trained whole-plant ONNX model.
+Small image examples and the new best/last PT weights are included in this repository.
+Complete image, annotation and training packages are distributed through the
+[v2.1.0 Release](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/tag/v2.1.0); see [downloads](../data/README.md).
 
-Cultivar-linked phenotype records, sample identities, images, annotations and the full reference–evaluation membership file are not publicly released because of confidentiality restrictions. The original study inputs and membership allocations are required to reproduce the reported panel statistics.
+The Release contains 958 curated indoor examples, 150 outdoor examples and a separate 256-image
+annotated model collection. These counts do not establish unique biological samples across collections.
+Overlap with the original 150-variety panel is unverified. Known content-to-prior-source filename
+correspondences are retained with the complete data and do not establish cultivar equivalence.
 
-No image or annotation dataset is included in the current release.
+Complete historical phenotype/reference-evaluation inputs and the original C++ measurement application
+are not included. The release therefore does not reproduce the full historical raw-image-to-trait pipeline.
+Images/annotations are CC BY-NC 4.0; code and checkpoints retain applicable upstream terms.

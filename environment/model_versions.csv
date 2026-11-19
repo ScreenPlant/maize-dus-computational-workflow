@@ -1,4 +1,4 @@
-Component,Ultralytics,PyTorch,ONNX_Runtime,Record
+﻿Component,Ultralytics,PyTorch,ONNX_Runtime,Record
 Plant ONNX export,8.3.32,2.5.1,,Export metadata
 Current inference check,8.4.46,2.11.0+cu126,1.23.2,CPU execution
-Separate retained training checkpoint,8.3.89,,,Six classes; distinct from the released model
+New five-class retraining/test,8.4.46,2.11.0+cu126,,YOLO11s-seg PT; fixed 154/51/51 split; see retraining_environment.json

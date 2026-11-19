@@ -1,16 +1,15 @@
 # Software versions
 
-This folder records software versions. Install the statistical dependencies with the root [requirements.txt](../requirements.txt).
-
-| Component | Version information |
+| Stage | Versions |
 | --- | --- |
-| Statistical analysis | Python 3.13.5; package versions in `requirements.txt` |
-| Released plant ONNX file | Ultralytics 8.3.32 and PyTorch producer 2.5.1 recorded in the export metadata |
-| Current inference check | Ultralytics 8.4.46, PyTorch 2.11.0+cu126 and ONNX Runtime 1.23.2; CPU execution |
-| Image-measurement application | C++, MSVC v143/MFC and OpenCV 4.10.0 link libraries, with ONNX Runtime |
+| Statistical analysis | Python 3.13.5; packages in ../requirements.txt |
+| New PT retraining/test | Python 3.13.5; Ultralytics 8.4.46; torch 2.11.0+cu126; torchvision 0.26.0+cu126; CUDA 12.6; RTX 3060 |
+| New PT image/analysis dependencies | OpenCV-Python 4.12.0.88; NumPy 2.4.3; SciPy 1.15.3; pandas 2.2.3 |
+| Source annotations | LabelMe 5.5.0 |
+| Historical ONNX export metadata | Ultralytics 8.3.32; PyTorch producer 2.5.1 |
+| ONNX inference check | Ultralytics 8.4.46; torch 2.11.0+cu126; ONNX Runtime 1.23.2; CPU |
+| Historical C++ application | MSVC v143/MFC; OpenCV 4.10.0 link libraries; ONNX Runtime; source not included |
 
-The export metadata and the current inference versions describe different steps. The original image-measurement application is separate from the public Python analysis scripts.
-
-The retained six-class training checkpoint records Ultralytics 8.3.89. It is distinct from the released five-class model; see [model notes](../docs/model_notes.md).
-
-The current inference environment is also recorded in the [v2.0.0 release](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/tag/v2.0.0). It describes the tested installation, rather than the original training environment.
+Install statistical dependencies with `python -m pip install -r requirements.txt`.
+For the new PT, install the matching PyTorch/torchvision build and Ultralytics 8.4.46.
+For ONNX inference, also install ONNX Runtime. Full environment and evaluator instructions are in the training archive.

@@ -1,16 +1,31 @@
 {
-  "file": "plant_deployment_5class.onnx",
-  "sha256": "012c06bc62f44006807bd1acff97e06dc21eb40b285f72243d44f81426b4fce9",
-  "bytes": 12929849,
-  "role": "Retained five-class whole-plant deployment model",
-  "classes": [
-    "leaf",
-    "root",
-    "ears",
-    "silk",
-    "tassel"
+  "classes": {
+    "0": "leaf",
+    "1": "root",
+    "2": "ears",
+    "3": "silk",
+    "4": "tassel"
+  },
+  "artifacts": [
+    {
+      "file": "best.pt",
+      "bytes": 20604309,
+      "sha256": "f2ee6b8dbcecd00be476d16dcc2652bebd9e55944aeee534e0d169682a0f0c29",
+      "role": "new_retraining_best"
+    },
+    {
+      "file": "last.pt",
+      "bytes": 20604309,
+      "sha256": "12f784322f35741038a8d5e2b7d6051f6069c7b97072a5b54a4fc53b70d55f56",
+      "role": "new_retraining_last"
+    },
+    {
+      "file": "plant_deployment_5class.onnx",
+      "bytes": 12929849,
+      "sha256": "012c06bc62f44006807bd1acff97e06dc21eb40b285f72243d44f81426b4fce9",
+      "role": "historical_deployment_ONNX"
+    }
   ],
-  "ultralytics_metadata": "8.3.32",
-  "training_checkpoint_linkage": "The retained six-class checkpoint is not asserted to be this model source",
-  "historical_ear_AI_enabled": false
+  "best_selection": "Epoch 105; validation box AP50:95 plus mask AP50:95; 155 epochs completed.",
+  "historical_ONNX_is_not_the_new_PT": true
 }
