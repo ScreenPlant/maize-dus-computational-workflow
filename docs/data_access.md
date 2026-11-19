@@ -6,7 +6,9 @@ Complete image, annotation and training packages are distributed through the
 
 The Release contains 958 curated indoor examples, 150 outdoor examples and a separate 256-image
 annotated model collection. These counts do not establish unique biological samples across collections.
-Overlap with the original 150-variety panel is unverified. Known content-to-prior-source filename
+The authors confirmed no overlap between model-development varieties and the 150-variety phenotype
+panel on 19 November 2026; see the [dated addendum](author_confirmation_2026-11-19.md).
+Earlier unverified statements in the unchanged ZIPs predate that confirmation. Known content-to-prior-source filename
 correspondences are retained with the complete data and do not establish cultivar equivalence.
 
 Complete historical phenotype/reference-evaluation inputs and the original C++ measurement application

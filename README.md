@@ -26,8 +26,10 @@ For phenotype analysis, see [scripts/README.md](scripts/README.md). Original phe
 
 The new YOLO11s-seg uses five classes and a fixed 256-image train/validation/test split of 154/51/51.
 Test mask AP50: 0.796822; mask AP50:95: 0.450467; foreground class-union mIoU: 0.673647.
-See [validation details](docs/model_notes.md), including the quarter-resolution IoU grid and unverified
-overlap with the original 150-variety panel. The historical ONNX is a separate artifact.
+See [validation details](docs/model_notes.md) for the quarter-resolution IoU grid.
+The [dated author confirmation](docs/author_confirmation_2026-11-19.md) records no model-material
+overlap with the 150-variety panel and reported use of the same weights in PyTorch and ONNX.
+Artifact hashes and format-specific export metadata remain separate.
 Existing phenotype values, coding and selection results were not recalculated.
 
 The complete Release contains 958 indoor examples, 150 outdoor examples and the separate annotated

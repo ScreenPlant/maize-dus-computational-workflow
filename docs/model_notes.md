@@ -4,8 +4,9 @@ YOLO11s-seg was retrained on 256 images (one variety per image, author-confirmed
 LabelMe 5.5.0 with 4,225 polygons: leaf 3,084; root 152; ears 290; silk 335; tassel 364.
 The fixed variety-grouped train/validation/test split contains 154/51/51 images and 2,539/848/838
 polygons. Allocation used seed 42 and annotation-count balancing, without model performance.
-Overlap with the 150-variety phenotype panel is unverified because a confirmed identifier crosswalk
-is unavailable. This held-out split is internal to the annotated collection, not an external cohort.
+The authors confirmed on 19 November 2026 that these model materials do not overlap with the
+150-variety phenotype panel. See the [dated confirmation](author_confirmation_2026-11-19.md), which
+supersedes the earlier unverified status. This split remains a holdout within the annotated collection.
 
 Training requested 200 epochs and completed 155. best.pt is epoch 105, selected by validation
 box AP50:95 plus mask AP50:95; last.pt is retained separately. No test-based selection was used.
@@ -26,7 +27,10 @@ rerun exported results without test tuning. Logs and full metrics are included i
 
 The new PT was retrained after loss of the historical PT. The retained ONNX (input 1920x1920;
 export metadata Ultralytics 8.3.32 / PyTorch producer 2.5.1) is a separate artifact. New PT metrics
-must not be attributed to that ONNX. Original phenotype values, coding and selection results are unchanged.
+describe best.pt under its recorded evaluation protocol, not an independent ONNX performance test.
+The authors subsequently confirmed use of the same model weights for PyTorch and ONNX; no
+export-equivalence test was performed in this documentation update. Actual export metadata and hashes
+are retained. Original phenotype values, coding and selection results are unchanged.
 
 Download [whole_plant_training_archive.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/whole_plant_training_archive.zip) for original
 LabelMe/YOLO annotations, frozen membership, environment, run settings, test results and reproduction

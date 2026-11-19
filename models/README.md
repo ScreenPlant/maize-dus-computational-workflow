@@ -14,3 +14,7 @@ and [file hashes](model_manifest.json).
 [whole_plant_training_archive.zip](https://github.com/ScreenPlant/maize-dus-computational-workflow/releases/download/v2.1.0/whole_plant_training_archive.zip) includes the 256 images,
 original/converted annotations, frozen split, training settings, evaluator and test evidence.
 Checkpoints retain applicable Ultralytics/upstream licensing; the image-data license does not replace it.
+
+The authors confirmed common model weights for PyTorch evaluation and ONNX deployment on
+19 November 2026. See the [dated confirmation](../docs/author_confirmation_2026-11-19.md);
+actual file hashes/export metadata are unchanged and the ONNX was not independently performance-tested.
